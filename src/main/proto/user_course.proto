@@ -1,0 +1,150 @@
+syntax = "proto3";
+package usercourse ;
+
+
+service  usrcouse {
+  rpc GetUserArea(GetUserAreaRequest) returns (GetUserAreaResponse){}
+  rpc GetCourseInfo(GetCourseInfoRequest) returns (GetCourseInfoResponse){}
+
+  rpc WxAccountsUser(WxAccountsUserRequest) returns (WxAccountsUserResponse){}
+  rpc WxContacts(WxContactsRequest)returns(WxContactsResponse){}
+}
+
+message WxContactsRequest{
+  repeated   string user_name = 1;
+}
+
+message WxContactsResponse{
+  message  WxConSli{
+    string alias = 1;
+    string nick_name = 2;
+    string avatar = 3;
+    string avatar_local = 4;
+    string mini_qr = 5;
+    string owner_id = 6;
+    int32 jurisdiction = 7;
+    int32 is_show = 8;
+    string  user_name = 9;
+    AdvisoryPersonnel advisory = 10;
+  }
+
+  repeated WxConSli wxConSli = 1;
+}
+
+message WxAccountsUserRequest{}
+message WxAccountsUserResponse{
+  message  WxUserSli{
+    int32 id = 1;
+    int32 account_id = 2;
+    string user_name = 3;
+    string created_at = 4;
+    AdvisoryPersonnel advisory = 5;
+  }
+  repeated WxUserSli wxUserSli = 1;
+}
+
+
+message AdvisoryPersonnel{
+  int32 id = 1;
+  int32 uid = 2;
+  string nick_name = 3;
+  string  mobile = 4;
+  string name = 5;
+  string  wxid = 6;
+  string avatar = 7;
+  int32 group_id = 8;
+  string alias = 9;
+  string  avatar_local = 10;
+  string remark = 11;
+  string  province = 12;
+  string  city = 13;
+  string  area = 14;
+  string created_at = 15;
+  string  updated_at = 16;
+  int32  wx_num = 17;
+  string wx_status = 18;
+  string idnum = 19;
+
+}
+
+message GetCourseInfoRequest{
+  message Detailed{
+    int32  lesson_id = 1;
+    int32  chapter_id = 2;
+    int32  course_id = 3;
+
+    //附加字段
+    string  additional_field1 = 4;
+    string  additional_field2 = 5;
+  }
+
+  repeated  Detailed detailed = 1;
+}
+
+message GetCourseInfoResponse{
+  message Detailed{
+    int32  lesson_id = 1;
+    int32  chapter_id = 2;
+    int32  course_id = 3;
+    string  lesson_name = 4;
+    string chapter_name = 5;
+    string course_name = 6;
+    string  open_course_time = 7;
+    int32 teacher_id = 8;
+    string teacher_name = 9;
+
+    // 课程开课时间
+    int64 course_open_time = 10;
+    // 节开课时间
+    int64 lesson_open_time = 11;
+    // 课程分类ID
+    int32 cate_id = 12;
+    // 课程分类名称
+    string  cate_name = 13;
+    // 课程归属省市区
+    string  course_pro = 14;
+    string course_city = 15;
+    string course_area = 16;
+    //附加字段
+    string  additional_field1 = 17;
+    string  additional_field2 = 18;
+    // 1 直播中  2 录播
+    int32  live_status = 19;
+  }
+  repeated  Detailed detailed = 1;
+}
+
+
+message  GetUserAreaRequest{
+  message Detailed{
+    int64   Uid = 1;
+    //附加字段
+    string  additional_field1 = 2;
+    string  additional_field2 = 3;
+  }
+
+  repeated  Detailed detailed = 1;
+}
+
+message GetUserAreaResponse{
+  message Detailed{
+    int64   Uid = 1;
+    string  province = 2;
+    string  city = 3;
+    string  area = 4;
+
+
+    // 增长专员id
+    int32 poster_id = 5;
+    // 注册时间
+    int64 reg_time = 6;
+    // 注册来源
+    string reg_source = 7;
+
+    //附加字段
+    string  additional_field1 = 8;
+    string  additional_field2 = 9;
+  }
+
+  repeated  Detailed detailed = 1;
+}
